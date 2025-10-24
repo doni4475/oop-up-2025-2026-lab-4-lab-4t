@@ -1,45 +1,172 @@
-public class Point3D extends Point {
-    private int z;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import ua.opnu.Point3D;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-    public Point3D() {
-        super(0, 0);
-        this.z = 0;
-    }
+public class Task3Test {
+    @Nested
+    @DisplayName("Tests for the third task")
+    class Test {
 
-    public Point3D(int x, int y, int z) {
-        super(x, y);
-        this.z = z;
-    }
+        @org.junit.jupiter.api.Test
+        @DisplayName("Test constructor 1")
+        void test1() {
+            Point3D point = new Point3D();
 
-    public int getZ() {
-        return z;
-    }
+            assertEquals(0, point.getX());
+            assertEquals(0, point.getY());
+            assertEquals(0, point.getZ());
+        }
 
-    public void setLocation(int x, int y, int z) {
-        super.setLocation(x, y);
-        this.z = z;
-    }
+        @org.junit.jupiter.api.Test
+        @DisplayName("Test constructor 2")
+        void test2() {
+            Point3D point = new Point3D(0, 0, 0);
 
-    @Override
-    public void setLocation(int x, int y) {
-        super.setLocation(x, y);
-        this.z = 0;
-    }
+            assertEquals(0, point.getX());
+            assertEquals(0, point.getY());
+            assertEquals(0, point.getZ());
+        }
 
-    public double distance(Point3D p) {
-        int dx = getX() - p.getX();
-        int dy = getY() - p.getY();
-        int dz = z - p.getZ();
-        return Math.sqrt(dx * dx + dy * dy + dz * dz);
-    }
+        @org.junit.jupiter.api.Test
+        @DisplayName("Test constructor 3")
+        void test3() {
+            Point3D point = new Point3D(1, 1, 1);
 
-    @Override
-    public double distanceFromOrigin() {
-        return Math.sqrt(getX() * getX() + getY() * getY() + z * z);
-    }
+            assertEquals(1, point.getX());
+            assertEquals(1, point.getY());
+            assertEquals(1, point.getZ());
+        }
 
-    @Override
-    public String toString() {
-        return "(" + getX() + ", " + getY() + ", " + z + ")";
+        @org.junit.jupiter.api.Test
+        @DisplayName("Test constructor 4")
+        void test4() {
+            Point3D point = new Point3D(-1, -1, -1);
+
+            assertEquals(-1, point.getX());
+            assertEquals(-1, point.getY());
+            assertEquals(-1, point.getZ());
+        }
+
+        @org.junit.jupiter.api.Test
+        @DisplayName("Test setLocation(x, y) 1")
+        void test5() {
+            Point3D point = new Point3D();
+            point.setLocation(1, -1);
+
+            assertEquals(1, point.getX());
+            assertEquals(-1, point.getY());
+            assertEquals(0, point.getZ());
+        }
+
+        @org.junit.jupiter.api.Test
+        @DisplayName("Test setLocation(x, y) 2")
+        void test6() {
+            Point3D point = new Point3D(1, 1, 1);
+            point.setLocation(0, -1);
+
+            assertEquals(0, point.getX());
+            assertEquals(-1, point.getY());
+            assertEquals(0, point.getZ());
+        }
+
+        @org.junit.jupiter.api.Test
+        @DisplayName("Test setLocation(x, y, z) 1")
+        void test7() {
+            Point3D point = new Point3D(0, 0, 0);
+            point.setLocation(1, 0, 0);
+
+            assertEquals(1, point.getX());
+            assertEquals(0, point.getY());
+            assertEquals(0, point.getZ());
+        }
+
+        @org.junit.jupiter.api.Test
+        @DisplayName("Test setLocation(x, y, z) 2")
+        void test8() {
+            Point3D point = new Point3D(1, 0, 0);
+            point.setLocation(0, -1, 0);
+
+            assertEquals(0, point.getX());
+            assertEquals(-1, point.getY());
+            assertEquals(0, point.getZ());
+        }
+
+        @org.junit.jupiter.api.Test
+        @DisplayName("Test setLocation(x, y, z) 3")
+        void test9() {
+            Point3D point = new Point3D(0, -1, 0);
+            point.setLocation(0, 0, 3);
+
+            assertEquals(0, point.getX());
+            assertEquals(0, point.getY());
+            assertEquals(3, point.getZ());
+        }
+
+        @org.junit.jupiter.api.Test
+        @DisplayName("Test setLocation(x, y, z) 4")
+        void test10() {
+            Point3D point = new Point3D(0, 0, 3);
+            point.setLocation(0, 0, 0);
+
+            assertEquals(0, point.getX());
+            assertEquals(0, point.getY());
+            assertEquals(0, point.getZ());
+        }
+
+        @org.junit.jupiter.api.Test
+        @DisplayName("Test getXYZ() 1")
+        void test11() {
+            Point3D point = new Point3D(-3, 6, 3);
+
+            assertEquals(-3, point.getX());
+            assertEquals(6, point.getY());
+            assertEquals(3, point.getZ());
+        }
+
+        @org.junit.jupiter.api.Test
+        @DisplayName("Test distanceFromOrigin() 1")
+        void test12() {
+            Point3D point = new Point3D(0, 0, 0);
+
+            double expected = 0.0;
+            assertEquals(expected, point.distanceFromOrigin());
+        }
+
+        @org.junit.jupiter.api.Test
+        @DisplayName("Test distanceFromOrigin() 2")
+        void test13() {
+            Point3D point = new Point3D(1, 0, 0);
+
+            double expected = 1.0;
+            assertEquals(expected, point.distanceFromOrigin());
+        }
+
+        @org.junit.jupiter.api.Test
+        @DisplayName("Test distanceFromOrigin() 3")
+        void test14() {
+            Point3D point = new Point3D(1, -1, 0);
+
+            double expected = 1.4142135623730951;
+            assertEquals(expected, point.distanceFromOrigin());
+        }
+
+        @org.junit.jupiter.api.Test
+        @DisplayName("Test distanceFromOrigin() 4")
+        void test15() {
+            Point3D point = new Point3D(-2, 2, 1);
+
+            double expected = 3.0;
+            assertEquals(expected, point.distanceFromOrigin());
+        }
+
+        @org.junit.jupiter.api.Test
+        @DisplayName("Test distanceFromOrigin() 5")
+        void test16() {
+            Point3D point = new Point3D(3, 3, 3);
+
+            double expected = 5.196152422706632;
+            assertEquals(expected, point.distanceFromOrigin());
+        }
     }
 }
